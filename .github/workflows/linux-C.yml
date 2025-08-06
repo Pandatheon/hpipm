@@ -1,4 +1,4 @@
-name: Linux AMD64 C Build
+name: Linux C Build
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   linux-amd64-c-build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
