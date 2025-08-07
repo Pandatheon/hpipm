@@ -16,11 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y octave liboctave-dev bc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y octave liboctave-dev bc
       - name: Build BLASFEO
         run: |
           git clone https://github.com/giaf/blasfeo
-          make -C blasfeo shared_library TARGET=X64_INTEL_HASWELL LA=HIGH_PERFORMANCE -j 4
+          make -C blasfeo shared_library TARGET=AVX LA=HIGH_PERFORMANCE -j 4
       - name: Build HPIPM (Octave interface) and run examples
         run: |
           make shared_library TARGET=AVX BLASFEO_PATH=${{ github.workspace }}/blasfeo -j 4
