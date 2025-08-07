@@ -7,6 +7,12 @@ on:
 jobs:
   linux-amd64-octave-build:
     runs-on: ubuntu-22.04
+    env:
+      HPIPM_MAIN_FOLDER: ${{ github.workspace }}
+      BLASFEO_MAIN_FOLDER: ${{ github.workspace }}/blasfeo
+      OCTAVE_PATH: ${{ env.OCTAVE_PATH }}:${{ github.workspace }}/interfaces/matlab_octave
+      LD_LIBRARY_PATH: ${{ env.LD_LIBRARY_PATH }}:${{ github.workspace }}/lib:${{ github.workspace }}/blasfeo/lib
+      ENV_RUN: true
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
@@ -18,7 +24,11 @@ jobs:
       - name: Build HPIPM (Octave interface) and run examples
         run: |
           make shared_library TARGET=AVX BLASFEO_PATH=${{ github.workspace }}/blasfeo -j 4
-          . examples/matlab_octave/env.sh
+          echo "HPIPM_MAIN_FOLDER=${HPIPM_MAIN_FOLDER}"
+          echo "BLASFEO_MAIN_FOLDER=${BLASFEO_MAIN_FOLDER}"
+          echo "OCTAVE_PATH=${OCTAVE_PATH}"
+          echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
+          echo "ENV_RUN=${ENV_RUN}"
           make -C interfaces/matlab_octave all -j 4
           make -C examples/matlab_octave example_getting_started
           make -C examples/matlab_octave example_from_qp_data_c

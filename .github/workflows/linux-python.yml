@@ -7,6 +7,12 @@ on:
 jobs:
   linux-amd64-python-build:
     runs-on: ubuntu-22.04
+    env:
+      HPIPM_MAIN_FOLDER: ${{ github.workspace }}
+      BLASFEO_MAIN_FOLDER: ${{ github.workspace }}/blasfeo
+      LD_LIBRARY_PATH: ${{ env.LD_LIBRARY_PATH }}:${{ github.workspace }}/lib:${{ github.workspace }}/blasfeo/lib
+      PYTHONPATH: ${{ github.workspace }}/examples/casadi_python/casadi
+      ENV_RUN: true
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
@@ -26,7 +32,11 @@ jobs:
       - name: Build HPIPM (Python interface) and run examples
         run: |
           make shared_library TARGET=AVX BLASFEO_PATH=${{ github.workspace }}/blasfeo -j 4
-          . examples/python/env.sh
+          echo "HPIPM_MAIN_FOLDER=${HPIPM_MAIN_FOLDER}"
+          echo "BLASFEO_MAIN_FOLDER=${BLASFEO_MAIN_FOLDER}"
+          echo "LD_LIBRARY_PATH=${LD_LIBRARY_PATH}"
+          echo "PYTHONPATH=${PYTHONPATH}"
+          echo "ENV_RUN=${ENV_RUN}"
           make -C interfaces/python all
           make -C examples/python example_qp_getting_started
           make -C examples/python example_qcqp_getting_started
