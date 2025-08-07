@@ -25,11 +25,10 @@ jobs:
           make -C blasfeo shared_library TARGET=X64_INTEL_HASWELL LA=HIGH_PERFORMANCE -j 4
       - name: Build HPIPM (Python interface) and run examples
         run: |
-          source interfaces/matlab_octave/env.sh
           make shared_library TARGET=AVX BLASFEO_PATH=${{ github.workspace }}/blasfeo -j 4
+          . examples/python/env.sh
           make -C interfaces/python all
           make -C examples/python example_qp_getting_started
           make -C examples/python example_qcqp_getting_started
           make -C examples/casadi_python get_casadi
           make -C examples/casadi_python example_PMSM
-        shell: bash
