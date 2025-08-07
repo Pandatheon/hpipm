@@ -10,7 +10,7 @@ jobs:
     env:
       HPIPM_MAIN_FOLDER: ${{ github.workspace }}
       BLASFEO_MAIN_FOLDER: ${{ github.workspace }}/blasfeo
-      LD_LIBRARY_PATH: ${{ LD_LIBRARY_PATH }}:${{ github.workspace }}/lib:${{ github.workspace }}/blasfeo/lib
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:${{ github.workspace }}/lib:${{ github.workspace }}/blasfeo/lib
       PYTHONPATH: ${{ github.workspace }}/examples/casadi_python/casadi
       ENV_RUN: true
     steps:
