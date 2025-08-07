@@ -18,8 +18,8 @@ jobs:
       - name: Build HPIPM (Octave interface) and run examples
         run: |
           make shared_library TARGET=AVX BLASFEO_PATH=${{ github.workspace }}/blasfeo -j 4
-          make -C interfaces/matlab_octave all -j 4
           source interfaces/matlab_octave/env.sh
+          make -C interfaces/matlab_octave all -j 4
           make -C examples/matlab_octave example_getting_started
           make -C examples/matlab_octave example_from_qp_data_c
           make -C examples/matlab_octave example_mass_spring
