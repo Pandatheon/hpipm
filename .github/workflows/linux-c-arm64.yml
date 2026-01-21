@@ -1,4 +1,4 @@
-name: Linux C Build
+name: Linux C ARM64 Build
 
 on:
   push:
@@ -18,6 +18,13 @@ jobs:
       - name: Build HPIPM and run C tests
         run: |
           make static_library TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo -j 4
-          for test in dense dense_qcqp ocp ocp_qcqp cond cond_qcqp part_cond part_cond_qcqp tree_ocp tree_ocp_qcqp; do
-            make -C test_problems test_d_${test} TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
-          done
+          make -C test_problems test_d_dense TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          # make -C test_problems test_d_dense_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_ocp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_ocp_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_cond TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_part_cond TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_part_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_tree_ocp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_tree_ocp_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
