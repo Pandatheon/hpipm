@@ -14,7 +14,7 @@ jobs:
       - name: Build BLASFEO
         run: |
           git clone https://github.com/giaf/blasfeo
-          make -C blasfeo static_library TARGET=ARMV8A_ARM_CORTEX_A57 LA=HIGH_PERFORMANCE -j 4
+          make -C blasfeo static_library TARGET=GENERIC LA=HIGH_PERFORMANCE -j 4
       - name: Build HPIPM and run C tests
         run: |
           make static_library TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo -j 4
