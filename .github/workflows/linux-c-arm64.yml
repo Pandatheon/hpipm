@@ -14,17 +14,17 @@ jobs:
       - name: Build BLASFEO
         run: |
           git clone https://github.com/giaf/blasfeo
-          make -C blasfeo static_library TARGET=GENERIC LA=HIGH_PERFORMANCE -j 4
+          make -C blasfeo static_library TARGET=ARMV8A_ARM_CORTEX_A57 LA=HIGH_PERFORMANCE -j 4
       - name: Build HPIPM and run C tests
         run: |
           make static_library TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo -j 4
           make -C test_problems test_d_dense TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
-          # make -C test_problems test_d_dense_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_dense_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_ocp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_ocp_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_cond TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
-          # make -C test_problems test_d_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_part_cond TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
-          # make -C test_problems test_d_part_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_part_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_tree_ocp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
-          # make -C test_problems test_d_tree_ocp_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          make -C test_problems test_d_tree_ocp_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
