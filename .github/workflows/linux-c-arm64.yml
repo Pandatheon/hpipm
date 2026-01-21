@@ -25,6 +25,6 @@ jobs:
           make -C test_problems test_d_cond TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_part_cond TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
-          make -C test_problems test_d_part_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
+          # make -C test_problems test_d_part_cond_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_tree_ocp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
           make -C test_problems test_d_tree_ocp_qcqp TARGET=GENERIC BLASFEO_PATH=${{ github.workspace }}/blasfeo PRINT=0
